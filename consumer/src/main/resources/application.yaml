@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: consumer-api
+  data:
+    mongodb:
+      database: consumer
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          autoCreateTopics: true
+          producer-properties:
+              key:
+                  serializer: org.apache.kafka.common.serialization.StringSerializer
+      bindings:
+        consumerEvents-out-0:
+          destination: consumer_events
+          contentType: application/json
+          group: consumer-application
+          producer:
+            partitionCount: 1
+      default-binder: kafka
+#  kafka:
+#    consumer:
+#      auto-offset-reset: earliest
+#      bootstrap-servers: localhost:9092
+#      group-id: group-id
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      properties:
+#        spring.json.trusted.packages: '*'
+#    producer:
+#      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+logging:
+  config: classpath:logback-spring.xml
+
+management:
+  tracing:
+    enabled: true
+    propagation:
+      type: B3
+    sampling:
+      probability: 1.0
+    baggage:
+      correlation:
+        enabled: true
