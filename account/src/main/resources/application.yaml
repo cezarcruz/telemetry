@@ -1,26 +1,38 @@
+server:
+  port: 8081
+
 spring:
   application:
-    name: consumer-api
+    name: account-api
   data:
     mongodb:
-      database: consumer
+      database: account
   cloud:
+    function:
+      definition: consumerEventsListener
     stream:
       kafka:
         binder:
           brokers: localhost:9092
           autoCreateTopics: true
           producer-properties:
-              key:
-                  serializer: org.apache.kafka.common.serialization.StringSerializer
-#      bindings:
-#        consumerEvents-out-0:
-#          destination: consumer-events
-#          contentType: application/json
-#          group: consumer-application
-#          producer:
-#            partitionCount: 1
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+        deserializationExceptionHandler: logAndContinue
+        bindings:
+          consumerEventsListener-in-0:
+            consumer:
+              startOffset: latest
+              resetOffsets: false
+              enabledDlq: true
+              dlqName: consumer-events-dlq
+      bindings:
+        consumerEventsListener-in-0:
+          destination: consumer-events
+          contentType: application/json
+          group: account-application
       default-binder: kafka
+
 #  kafka:
 #    consumer:
 #      auto-offset-reset: earliest
@@ -35,8 +47,8 @@ spring:
 #      key-serializer: org.apache.kafka.common.serialization.StringSerializer
 #      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
-#logging:
-#  config: classpath:logback-spring.xml
+logging:
+  config: classpath:logback-spring.xml
 
 management:
   tracing:

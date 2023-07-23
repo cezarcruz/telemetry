@@ -10,8 +10,8 @@ import org.springframework.messaging.support.MessageBuilder;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageProducer {
 
-    public static <T> Message<T> toMessage(final T message, @NotNull final MessageHeaders headers) {
-        return MessageBuilder.createMessage(message, headers);
+    public static <T> Message<T> toMessage(final T message) {
+        return MessageBuilder.withPayload(message).build();
     }
 
 }

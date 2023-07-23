@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ConsumerCreatedEvent implements EventSourceProducer {
 
-    private static final String TOPIC = "consumer_events";
+    private static final String TOPIC = "consumer-events";
     private static final String EVENT_TYPE = "CONSUMER_CREATED";
 
 

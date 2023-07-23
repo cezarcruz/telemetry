@@ -9,18 +9,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.function.StreamBridge;
-import org.springframework.messaging.MessageHeaders;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class ConsumerCreatedGateway {
 
-    // temporaty
-    //private final KafkaTemplate<String, ConsumerEntity> kafkaTemplate;
     private final StreamBridge streamBridge;
     private final ObjectMapper objectMapper;
 
@@ -38,7 +34,7 @@ public class ConsumerCreatedGateway {
         try {
             final var message = objectMapper.writeValueAsString(source);
 
-            streamBridge.send(event.getTopicName(), MessageProducer.toMessage(message, new MessageHeaders(Map.of())));
+            streamBridge.send(event.getTopicName(), MessageProducer.toMessage(message));
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
