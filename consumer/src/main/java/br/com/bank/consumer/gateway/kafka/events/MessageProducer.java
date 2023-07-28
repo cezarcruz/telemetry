@@ -1,10 +1,8 @@
 package br.com.bank.consumer.gateway.kafka.events;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

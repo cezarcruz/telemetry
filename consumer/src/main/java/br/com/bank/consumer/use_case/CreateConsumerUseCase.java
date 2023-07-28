@@ -5,6 +5,7 @@ import br.com.bank.consumer.gateway.mongo.ConsumerRepository;
 import br.com.bank.consumer.gateway.mongo.entity.ConsumerEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -17,6 +18,9 @@ public class CreateConsumerUseCase {
 
     public ConsumerEntity create(final ConsumerEntity consumerEntity) {
         final var consumerSaved = consumerRepository.save(consumerEntity);
+
+        MDC.put("consumerId", consumerSaved.id());
+
         log.info("consumer created {}", consumerSaved);
 
         consumerCreatedGateway.notify(consumerSaved);
