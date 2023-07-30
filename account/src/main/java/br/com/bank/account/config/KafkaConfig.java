@@ -1,4 +1,4 @@
-package br.com.bank.account;
+package br.com.bank.account.config;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

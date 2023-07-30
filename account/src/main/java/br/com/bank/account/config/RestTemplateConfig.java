@@ -1,4 +1,4 @@
-package br.com.bank.account;
+package br.com.bank.account.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

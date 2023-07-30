@@ -1,4 +1,4 @@
-package br.com.bank.account;
+package br.com.bank.account.out.mongo;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

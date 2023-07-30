@@ -1,4 +1,4 @@
-package br.com.bank.account.entrypoint;
+package br.com.bank.account.entrypoint.event;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

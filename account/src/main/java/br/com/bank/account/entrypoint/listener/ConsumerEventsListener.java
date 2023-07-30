@@ -1,17 +1,14 @@
-package br.com.bank.account.entrypoint;
+package br.com.bank.account.entrypoint.listener;
 
-import br.com.bank.account.AccountEntity;
-import br.com.bank.account.AccountRepository;
-import io.micrometer.observation.Observation;
+import br.com.bank.account.out.mongo.AccountEntity;
+import br.com.bank.account.out.mongo.AccountRepository;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @Component

@@ -1,4 +1,4 @@
-package br.com.bank.account;
+package br.com.bank.account.config;
 
 import com.mongodb.ConnectionString;
 import io.micrometer.observation.ObservationRegistry;

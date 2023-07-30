@@ -1,5 +1,6 @@
-package br.com.bank.account.entrypoint;
+package br.com.bank.account.entrypoint.event;
 
+import br.com.bank.account.entrypoint.event.Event;
 import lombok.Data;
 
 import java.time.LocalDate;
