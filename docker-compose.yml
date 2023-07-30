@@ -115,10 +115,23 @@ services:
       - "3000:3000"
     volumes:
       - ./config/grafana/:/etc/grafana/provisioning/
+  
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:latest
+    volumes:
+      - portainer_volume:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8000:8000
+      - 9443:9443
+      - 9000:9000
+
 
 volumes:
   mysql_volume:
   mongo_volume:
+  portainer_volume:
 
 networks:
   broker-kafka:

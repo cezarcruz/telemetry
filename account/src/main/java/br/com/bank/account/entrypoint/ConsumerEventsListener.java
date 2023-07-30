@@ -1,5 +1,7 @@
 package br.com.bank.account.entrypoint;
 
+import br.com.bank.account.AccountEntity;
+import br.com.bank.account.AccountRepository;
 import io.micrometer.observation.Observation;
 import lombok.RequiredArgsConstructor;
 
@@ -16,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class ConsumerEventsListener {
 
+    private final AccountRepository accountRepository;
     private final RestTemplateBuilder builder;
 
     @KafkaListener(topics = "consumer-events", groupId = "penis")
@@ -27,5 +30,7 @@ public class ConsumerEventsListener {
         final var forEntity = x.getForEntity("http://localhost:8080/consumer/64bc2b36525cbd62370d0af5", String.class);
 
         log.info("xpto from entity {}", forEntity);
+
+        accountRepository.save(new AccountEntity(null, "Cezinha"));
     }
 }
