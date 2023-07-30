@@ -1,0 +1,9 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: wallet-api
+  data:
+    mongodb:
+      database: wallet

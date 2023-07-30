@@ -18,7 +18,7 @@ public class ConsumerEventsListener {
     private final AccountRepository accountRepository;
     private final RestTemplateBuilder builder;
 
-    @KafkaListener(topics = "consumer-events", groupId = "penis")
+    @KafkaListener(topics = "consumer-events", groupId = "account-group")
     public void onMessage(Message message) {
         log.info("receiving message {}", message);
 
