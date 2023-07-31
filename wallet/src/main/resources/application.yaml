@@ -7,3 +7,33 @@ spring:
   data:
     mongodb:
       database: wallet
+  cloud:
+    function:
+      definition: consumerEventsListener
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          autoCreateTopics: true
+          producer-properties:
+            key:
+              serializer: org.apache.kafka.common.serialization.StringSerializer
+        deserializationExceptionHandler: logAndContinue
+        bindings:
+          consumerEventsListener-in-0:
+            consumer:
+              startOffset: latest
+              resetOffsets: false
+              enabledDlq: true
+              dlqName: consumer-events-dlq
+      bindings:
+        consumerEventsListener-in-0:
+          destination: consumer-events
+          contentType: application/json
+          group: wallet-consumer
+      default-binder: kafka
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
